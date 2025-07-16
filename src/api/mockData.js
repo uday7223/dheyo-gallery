@@ -5,8 +5,9 @@ const mockGallery = Array.from({ length: 30 }).map((_, index) => ({
   url:
     index % 5 === 0
       ? 'https://www.w3schools.com/html/mov_bbb.mp4'
-      : `https://source.unsplash.com/random/300x${300 + index}`,
+      : `https://picsum.photos/id/${index + 10}/300/400`,
   generation_id: `gen_${index + 1}`,
 }));
+
 
 export default mockGallery;

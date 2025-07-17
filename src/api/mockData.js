@@ -1,5 +1,5 @@
 // 30 dummy items: mix of images & videos
-const mockGallery = Array.from({ length: 33 }).map((_, index) => ({
+const mockGallery = Array.from({ length: 40 }).map((_, index) => ({
   id: index + 1,
   type: index % 5 === 0 ? 'video' : 'image',
   url:

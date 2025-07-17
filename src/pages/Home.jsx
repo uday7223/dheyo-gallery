@@ -29,10 +29,12 @@ const Home = () => {
   }, [inView, hasNextPage, fetchNextPage]);
 
   return (
-    <div className="columns-2 md:columns-3 gap-4 p-4 space-y-4">
+
+    <>
+        <div className="columns-2 md:columns-3 gap-4 p-4 space-y-4">
       {/* Show skeletons while loading initial content */}
-      {/* {isLoading &&
-        Array.from({ length: 3 }).map((_, i) => <MediaSkeleton key={i} />)} */}
+      {isLoading &&
+        Array.from({ length: 10 }).map((_, i) => <MediaSkeleton key={i} />)}
 
       {/* Render actual content */}
       {data?.pages.map((page, i) => (
@@ -66,18 +68,31 @@ const Home = () => {
 
       {/* Skeleton while loading next page */}
       {isFetchingNextPage &&
-        Array.from({ length: 3 }).map((_, i) => <MediaSkeleton key={`skeleton-${i}`} />)}
+        Array.from({ length: 10 }).map((_, i) => <MediaSkeleton key={`skeleton-${i}`} />)}
 
       {/* Loader at bottom when fetching next page */}
-      {isFetchingNextPage && (
+      {/* {isFetchingNextPage && (
         <div className="flex justify-center my-6">
           <Loader />
         </div>
-      )}
+      )} */}
 
       {/* Intersection observer trigger */}
       <div ref={ref} className="h-10" />
+     
     </div>
+    
+    
+
+     {!hasNextPage && !isLoading && (
+  <div className="text-center text-gray-500 py-2">
+    You’ve reached the end 👋🏼
+  </div>
+)}
+    </>
+
+
+    
     
 
   );

@@ -3,6 +3,8 @@ import { fetchGallery } from '../api/mockApi';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from '../components/Loader';
+import MediaSkeleton from '../components/MediaSkeleton';
 
 const Home = () => {
   const {
@@ -26,52 +28,58 @@ const Home = () => {
     }
   }, [inView, hasNextPage, fetchNextPage]);
 
-  if (isLoading) {
-    return (
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 p-4">
-        {[...Array(6)].map((_, i) => (
-          <div key={i} className="bg-gray-300 h-48 animate-pulse rounded"></div>
-        ))}
-      </div>
-    );
-  }
-
   return (
     <div className="columns-2 md:columns-3 gap-4 p-4 space-y-4">
+      {/* Show skeletons while loading initial content */}
+      {/* {isLoading &&
+        Array.from({ length: 3 }).map((_, i) => <MediaSkeleton key={i} />)} */}
+
+      {/* Render actual content */}
       {data?.pages.map((page, i) => (
         <div key={i}>
           {page.data.map((item) => (
+              <div key={item.id} className="break-inside-avoid mb-4">
+
             <Link key={item.id} to={`/g/${item.generation_id}`}>
               {item.type === 'image' ? (
                 <img
                   src={item.url}
                   alt={`item-${item.id}`}
-                  className="w-full rounded-lg mb-4 break-inside-avoid"
+                  loading="lazy"
+                  onError={(e) => (e.target.src = 'https://via.placeholder.com/300x400')}
+                  className="w-full min-h-[200px] rounded-lg mb-4 transition-all duration-500 ease-in-out"
+
                 />
               ) : (
                 <video
                   src={item.url}
                   controls
-                  className="w-full rounded-lg mb-4 break-inside-avoid"
+                  className="w-full rounded-lg mb-4 "
                 />
               )}
             </Link>
+        </div>
+
           ))}
         </div>
       ))}
 
-      {/* Loading more skeleton */}
+      {/* Skeleton while loading next page */}
+      {isFetchingNextPage &&
+        Array.from({ length: 3 }).map((_, i) => <MediaSkeleton key={`skeleton-${i}`} />)}
+
+      {/* Loader at bottom when fetching next page */}
       {isFetchingNextPage && (
-        <div className="space-y-4">
-          {[...Array(2)].map((_, i) => (
-            <div key={i} className="bg-gray-300 h-48 animate-pulse rounded" />
-          ))}
+        <div className="flex justify-center my-6">
+          <Loader />
         </div>
       )}
 
-      {/* Observer trigger */}
+      {/* Intersection observer trigger */}
       <div ref={ref} className="h-10" />
     </div>
+    
+
   );
 };
 

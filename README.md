@@ -33,25 +33,7 @@ This project is a responsive, visually polished **infinite scroll gallery** buil
 ### ✅ Routing
 - Clicking an item navigates to `/g/:generation_id`.
 - Route is directly accessible and loads content based on the `generation_id`.
-
----
-
-## 📁 Project Structure
-
-src/
-│
-├── api/
-│ └── mockApi.js # Simulated API with offset + limit
-│
-├── components/
-│ ├── Loader.jsx # Spinner loader
-│ └── MediaSkeleton.jsx # Skeleton card for loading
-│
-├── pages/
-│ └── Home.jsx # Masonry gallery with infinite scroll
-│
-├── App.jsx # Route configuration
-└── main.jsx # App entry point with QueryClientProvider
+- Mock API simulation** with pagination using `offset` and `limit`
 
 
 ---
@@ -82,12 +64,12 @@ App will be available at: http://localhost:5173
 | `/g/:generation_id` | Individual generation route (mock data) |
 
 
-📌 Notes
-All data is mock-simulated (no real API).
+🎬 Notes
+All media files (img0.jpg, video0.mp4, etc.) are locally placed inside public/assets/images and public/assets/videos.
 
-Placeholder fallback is used for broken images.
+You can easily swap with live image/video URLs from Unsplash, Pexels, or public APIs. form mockData.js file
 
-Styled using Tailwind’s utility-first approach.
+The layout and load behavior are fully responsive.
 
 🤝 Submitted For
 Frontend Developer Internship — Dheyo AI

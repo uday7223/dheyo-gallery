@@ -1,4 +1,4 @@
-// 30 dummy items: mix of images & videos fetched from external apis
+// 30 dummy items: images & videos fetched from external apis
 // const mockGallery = Array.from({ length: 40 }).map((_, index) => ({
 //   id: index + 1,
 //   type: index % 5 === 0 ? 'video' : 'image',
@@ -10,7 +10,7 @@
 // }));
 
 
-// dummy data from local
+// dummy data from local assets
 const mockGallery = Array.from({ length: 30 }).map((_, index) => ({
   id: index + 1,
   type: index % 6 === 0 ? 'video' : 'image',
@@ -21,19 +21,6 @@ const mockGallery = Array.from({ length: 30 }).map((_, index) => ({
   generation_id: `gen_${index + 1}`,
 }));
 
-
-// const mockGallery = Array.from({ length: 40 }).map((_, index) => {
-//   const isVideo = index < 10; // First 10 are videos, rest are images
-
-//   return {
-//     id: index + 1,
-//     type: isVideo ? 'video' : 'image',
-//     url: isVideo
-//       ? `/assets/videos/video${index}.mp4`         // video0.mp4 → video9.mp4
-//       : `/assets/images/img${index - 10}.jpg`,     // img0.jpg → img29.jpg
-//     generation_id: `gen_${index + 1}`,
-//   };
-// });
 
 
 export default mockGallery;

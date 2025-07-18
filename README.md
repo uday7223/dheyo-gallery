@@ -1,12 +1,95 @@
-# React + Vite
+# 🖼️ Infinite Masonry Gallery – Frontend Assignment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a responsive, visually polished **infinite scroll gallery** built with **ReactJS** and **Tailwind CSS**. It renders a **masonry-style layout** of images and videos and includes smooth user experience enhancements like **skeleton loaders**, **fade-in animations**, and **route-based navigation**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tech Stack
 
-## Expanding the ESLint configuration
+- ⚛️ React (Functional Components + Hooks)
+- 💨 Tailwind CSS
+- 🔄 React Query (@tanstack/react-query)
+- 📦 React Router
+- 👁️‍🗨️ Intersection Observer (via `react-intersection-observer`)
+- 🖼️ Mock API simulation for paginated data
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📸 Features
+
+### ✅ Masonry Layout
+- Responsive column layout using Tailwind's `columns-*` utility.
+- Preserves staggered layout even after image/video load using `break-inside-avoid`.
+
+### ✅ Infinite Scroll
+- Fetches additional content as the user scrolls down.
+- Uses `useInfiniteQuery` + `Intersection Observer`.
+
+### ✅ UX Enhancements
+- Skeleton loaders during initial and next-page fetches.
+- Smooth **fade-in from bottom** animation when media is loaded.
+- Displays `"You’ve reached the end"` when all data is loaded.
+
+### ✅ Routing
+- Clicking an item navigates to `/g/:generation_id`.
+- Route is directly accessible and loads content based on the `generation_id`.
+
+---
+
+## 📁 Project Structure
+
+src/
+│
+├── api/
+│ └── mockApi.js # Simulated API with offset + limit
+│
+├── components/
+│ ├── Loader.jsx # Spinner loader
+│ └── MediaSkeleton.jsx # Skeleton card for loading
+│
+├── pages/
+│ └── Home.jsx # Masonry gallery with infinite scroll
+│
+├── App.jsx # Route configuration
+└── main.jsx # App entry point with QueryClientProvider
+
+
+---
+
+## 🛠️ Getting Started
+
+### 1. Clone the repo
+
+git clone https://github.com/your-username/infinite-gallery.git
+
+cd infinite-gallery
+
+2. Install dependencies
+
+npm install
+
+3. Run the app locally
+
+npm run dev
+
+App will be available at: http://localhost:5173
+
+🔗 Routes
+
+| Route               | Description                             |
+| ------------------- | --------------------------------------- |
+| `/`                 | Home page with masonry gallery          |
+| `/g/:generation_id` | Individual generation route (mock data) |
+
+
+📌 Notes
+All data is mock-simulated (no real API).
+
+Placeholder fallback is used for broken images.
+
+Styled using Tailwind’s utility-first approach.
+
+🤝 Submitted For
+Frontend Developer Internship — Dheyo AI
+Location: Hyderabad
+Candidate: Udaykumar N.

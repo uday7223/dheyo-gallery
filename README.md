@@ -60,9 +60,9 @@ src/
 
 ### 1. Clone the repo
 
-git clone https://github.com/your-username/infinite-gallery.git
+git clone https://github.com/uday7223/dheyo-gallery.git
 
-cd infinite-gallery
+cd dheyo-gallery
 
 2. Install dependencies
 

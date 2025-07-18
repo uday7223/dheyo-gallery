@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 .main-con{
-  background-color: black !important;
+  /* background-color: black !important; */
   height: 100%;
   /* min-height: 100vh; */
-  color: white !important;
+  /* color: white !important; */
 }
 
 /* index.css or global.css */
@@ -31,7 +31,7 @@ video, img{
 
 
 /* loaderAnimation1 */
-/* .loader {
+.loader {
   width: 65px;
   aspect-ratio: 1;
   position: relative;
@@ -41,7 +41,7 @@ video, img{
   content: "";
   position: absolute;
   border-radius: 50px;
-  box-shadow: 0 0 0 3px inset #ffffff;
+  box-shadow: 0 0 0 3px inset #000000;
   animation: loaderAnimation1 2.5s infinite;
 }
 .loader:after {
@@ -75,10 +75,10 @@ video, img{
   100% {
     inset: 0 35px 35px 0;
   }
-} */
+}
 
 /* loaderAnimation2 */
-.loader {
+/* .loader {
   height: 50px;
   aspect-ratio: 2;
   border: 10px solid #000;
@@ -95,7 +95,7 @@ video, img{
 }
 @keyframes loaderAnimation2 {
   100%  {background-position:right,left,center,right}
-}
+} */
 
 /* loaderAnimation3 */
 /* .loader {

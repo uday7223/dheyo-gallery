@@ -22,8 +22,8 @@ const Home = () => {
 
     // Observer with rootMargin for early triggering
  const { ref, inView } = useInView({
-    threshold: 0,
-    rootMargin: '300px',
+    // threshold: 0,
+    // rootMargin: '200px',
   });
 
   const prevInView = useRef(inView);
@@ -43,11 +43,11 @@ const Home = () => {
 
     <>
 
-    <div className='home-container bg-black'>
+    <div className='home-containe'>
               <div className="columns-2 main-con md:columns-3 gap-5 p-4 space-y-4">
       {/* Show skeletons while loading initial content */}
       {isLoading &&
-        Array.from({ length: 6 }).map((_, i) => <MediaSkeleton key={i} />)}
+        Array.from({ length: 12 }).map((_, i) => <MediaSkeleton key={i} />)}
         
 
       {/* Render actual content */}
@@ -104,13 +104,13 @@ const Home = () => {
 
               {/* Loader at bottom when fetching next page */}
       {isFetchingNextPage && (
-        <div className="flex justify-center bg-black">
+        <div className="flex justify-center pb-3">
           <Loader />
         </div>
       )}
 
      {!hasNextPage && !isLoading && (
-  <div className="text-center bg-black text-white py-2">
+  <div className="text-center text-black py-2">
     You’ve reached the end 👋🏼
   </div>
 )}

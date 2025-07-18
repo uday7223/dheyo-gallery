@@ -1,4 +1,4 @@
-// 30 dummy items: images & videos fetched from external apis
+// 40 dummy items: images & videos fetched from external apis
 // const mockGallery = Array.from({ length: 40 }).map((_, index) => ({
 //   id: index + 1,
 //   type: index % 5 === 0 ? 'video' : 'image',

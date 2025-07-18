@@ -31,7 +31,7 @@ const Home = () => {
   return (
 
     <>
-        <div className="columns-2 md:columns-3 gap-4 p-4 space-y-4">
+        <div className="columns-2 main-con md:columns-3 gap-4 p-4 space-y-4">
       {/* Show skeletons while loading initial content */}
       {isLoading &&
         Array.from({ length: 1 }).map((_, i) => <MediaSkeleton key={i} />)}

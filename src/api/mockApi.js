@@ -1,18 +1,15 @@
 import mockGallery from './mockData';
 
-// Simulated delay (500ms)
-const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
 export const fetchGallery = async ({ offset = 0, limit = 10 }) => {
-  await sleep(3000); // simulate network delay of 500ms
+  // Simulate network delay
+  await new Promise((res) => setTimeout(res, 3000));
 
-  // console.log( `the whole data before ${limit} is ${mockGallery.length}`);
-  const data = mockGallery.slice(offset, offset + limit);
-  // console.log( `the data is after ${limit} is ${data}`);
+  const slice = mockGallery.slice(offset, offset + limit);
   const hasMore = offset + limit < mockGallery.length;
 
   return {
-    data,
+    data: slice,
     nextOffset: offset + limit,
     hasMore,
   };

@@ -34,7 +34,8 @@ const Home = () => {
         <div className="columns-2 md:columns-3 gap-4 p-4 space-y-4">
       {/* Show skeletons while loading initial content */}
       {isLoading &&
-        Array.from({ length: 10 }).map((_, i) => <MediaSkeleton key={i} />)}
+        Array.from({ length: 1 }).map((_, i) => <MediaSkeleton key={i} />)}
+        
 
       {/* Render actual content */}
       {data?.pages.map((page, i) => (
@@ -48,6 +49,7 @@ const Home = () => {
                   src={item.url}
                   alt={`item-${item.id}`}
                   loading="lazy"
+                  onLoad={(e) => e.target.classList.add('fade-in-up')}
                   onError={(e) => (e.target.src = 'https://via.placeholder.com/300x400')}
                   className="w-full min-h-[200px] rounded-lg mb-4 transition-all duration-500 ease-in-out"
 
@@ -56,7 +58,9 @@ const Home = () => {
                 <video
                   src={item.url}
                   controls
-                  className="w-full rounded-lg mb-4 "
+                      onLoadedData={(e) => e.target.classList.add('fade-in-up')}
+                      onError={(e) => (e.target.src = 'https://via.placeholder.com/300x400')}
+                      className="w-full rounded-lg mb-4 "
                 />
               )}
             </Link>
@@ -68,14 +72,14 @@ const Home = () => {
 
       {/* Skeleton while loading next page */}
       {isFetchingNextPage &&
-        Array.from({ length: 10 }).map((_, i) => <MediaSkeleton key={`skeleton-${i}`} />)}
+        Array.from({ length: 1 }).map((_, i) => <MediaSkeleton key={`skeleton-${i}`} />)}
 
       {/* Loader at bottom when fetching next page */}
-      {/* {isFetchingNextPage && (
+      {isFetchingNextPage && (
         <div className="flex justify-center my-6">
           <Loader />
         </div>
-      )} */}
+      )}
 
       {/* Intersection observer trigger */}
       <div ref={ref} className="h-10" />

@@ -15,7 +15,7 @@ const Home = () => {
     isLoading,
   } = useInfiniteQuery({
     queryKey: ['gallery'],
-    queryFn: ({ pageParam = 0 }) => fetchGallery({ offset: pageParam, limit: 10 }),
+    queryFn: ({ pageParam = 0 }) => fetchGallery({ offset: pageParam, limit: 6 }),
     getNextPageParam: (lastPage) =>
       lastPage.hasMore ? lastPage.nextOffset : undefined,
   });
@@ -34,7 +34,7 @@ const Home = () => {
         <div className="columns-2 main-con md:columns-3 gap-4 p-4 space-y-4">
       {/* Show skeletons while loading initial content */}
       {isLoading &&
-        Array.from({ length: 1 }).map((_, i) => <MediaSkeleton key={i} />)}
+        Array.from({ length: 12 }).map((_, i) => <MediaSkeleton key={i} />)}
         
 
       {/* Render actual content */}
@@ -89,7 +89,7 @@ const Home = () => {
     
 
      {!hasNextPage && !isLoading && (
-  <div className="text-center text-gray-500 py-2">
+  <div className="text-center bg-black text-white py-2">
     You’ve reached the end 👋🏼
   </div>
 )}

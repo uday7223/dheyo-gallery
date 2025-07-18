@@ -13,10 +13,10 @@
 // dummy data from local
 const mockGallery = Array.from({ length: 30 }).map((_, index) => ({
   id: index + 1,
-  type: index % 5 === 0 ? 'video' : 'image',
+  type: index % 6 === 0 ? 'video' : 'image',
   url:
-    index % 5 === 0
-      ? `/assets/videos/video${index}.mp4` 
+    index % 6 === 0
+      ? `/assets/videos/video1.mp4` 
       : `/assets/images/img${index}.jpg`,  
   generation_id: `gen_${index + 1}`,
 }));

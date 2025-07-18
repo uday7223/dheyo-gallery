@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 .main-con{
-  /* background-color: black !important; */
+  background-color: black !important;
   height: 100%;
-  min-height: 100vh;
-  /* color: white !important; */
+  /* min-height: 100vh; */
+  color: white !important;
 }
 
 /* index.css or global.css */
@@ -24,6 +24,10 @@
   animation: fadeInUp 0.5s ease-in-out forwards;
 }
 
+
+video, img{
+  animation: fadeInUp 0.5s ease-in-out forwards;
+}
 
 
 /* loaderAnimation1 */

@@ -8,7 +8,7 @@ import MediaSkeleton from '../components/MediaSkeleton';
 import Masonry from 'react-masonry-css';
 
 const breakpointColumnsObj = {
-  default: 3,
+  default: 4,
   768: 2,
   480: 2,
 };

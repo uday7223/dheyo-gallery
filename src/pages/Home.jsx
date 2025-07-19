@@ -5,6 +5,13 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Loader from '../components/Loader';
 import MediaSkeleton from '../components/MediaSkeleton';
+import Masonry from 'react-masonry-css';
+
+const breakpointColumnsObj = {
+  default: 3,
+  768: 2,
+  480: 2,
+};
 
 const Home = () => {
   const {
@@ -20,112 +27,83 @@ const Home = () => {
       lastPage.hasMore ? lastPage.nextOffset : undefined,
   });
 
-    // Observer with rootMargin for early triggering
- const { ref, inView } = useInView({
-    // threshold: 0,
-    // rootMargin: '200px',
-  });
-
+  const { ref, inView } = useInView();
   const prevInView = useRef(inView);
-
-
 
   useEffect(() => {
     if (inView && hasNextPage && inView !== prevInView.current) {
-      setTimeout(() => fetchNextPage(), 100); // slight delay = smoother
-      
+      setTimeout(() => fetchNextPage(), 100);
     }
-      prevInView.current = inView;
-
+    prevInView.current = inView;
   }, [inView, hasNextPage, fetchNextPage]);
 
   return (
-
     <>
+      <div className="home-container px-4">
+        {/* Initial Skeleton Loaders */}
+        {isLoading && (
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
+            {Array.from({ length: 12 }).map((_, i) => (
+              <MediaSkeleton key={i} />
+            ))}
+          </Masonry>
+        )}
 
-    <div className='home-containe'>
-              <div className="columns-2 main-con md:columns-3 gap-5 p-4 space-y-4">
-      {/* Show skeletons while loading initial content */}
-      {isLoading &&
-        Array.from({ length: 12 }).map((_, i) => <MediaSkeleton key={i} />)}
-        
+        {/* Masonry Gallery */}
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
+          {data?.pages.map((page) =>
+            page.data.map((item) => (
+              <div key={item.id} className="mb-4">
+                <Link to={`/g/${item.generation_id}`}>
+                  {item.type === 'image' ? (
+                    <img
+                      src={item.url}
+                      alt={`item-${item.id}`}
+                      loading="lazy"
+                      onLoad={(e) => e.target.classList.add('fade-in-up')}
+                      className="w-full min-h-[200px] rounded-lg transition-all duration-300 ease-in-out hover:shadow-[0_4px_20px_rgba(255,255,255,0.3)] hover:scale-[1.01]"
+                    />
+                  ) : (
+                    <video
+                      src={item.url}
+                      controls
+                      onLoadedData={(e) => e.target.classList.add('fade-in-up')}
+                      onError={(e) => (e.target.src = 'https://via.placeholder.com/300x400')}
+                      className="w-full rounded-lg opacity-0 transition-all duration-500 ease-in-out hover:shadow-[0_4px_20px_rgba(255,255,255,0.3)] hover:scale-[1.01]"
+                    />
+                  )}
+                </Link>
+              </div>
+            ))
+          )}
+        </Masonry>
 
-      {/* Render actual content */}
-      {data?.pages.map((page, i) => (
-        <div key={i}>
-          {page.data.map((item) => (
-              <div key={item.id} className="break-inside-avoid mb-4">
+        {/* Loader while fetching next page */}
+        {isFetchingNextPage && (
+          <div className="flex justify-center py-4">
+            <Loader />
+          </div>
+        )}
 
-            <Link key={item.id} to={`/g/${item.generation_id}`}>
-              {item.type === 'image' ? (
-                <img
-                  src={item.url}
-                  alt={`item-${item.id}`}
-                  loading="lazy"
-                  onLoad={(e) => e.target.classList.add('fade-in-up')}
-                  // onError={(e) => (e.target.src = 'https://via.placeholder.com/300x400')}
-                  className="w-full min-h-[200px] rounded-lg mb-4 transition-all  
-                   duration-300 ease-in-out hover:shadow-[0_4px_20px_rgba(255,255,255,0.3)]
-                   hover:scale-[1.01]
+        {/* Scroll Trigger */}
+        <div ref={ref} className="h-10" />
 
-                  "
-
-                />
-              ) : (
-                <video
-                  src={item.url}
-                  controls
-                  onLoadedData={(e) => e.target.classList.add('fade-in-up')}
-                  onError={(e) => (e.target.src = 'https://via.placeholder.com/300x400')}
-                      className="w-full rounded-lg mb-4 opacity-0 transition-all duration-500 ease-in-out
-                      hover:shadow-[0_4px_20px_rgba(255,255,255,0.3)]
-                      hover:scale-[1.01]
-                      "
-                />
-              )}
-            </Link>
-        </div>
-
-          ))}
-        </div>
-      ))}
-
-      {/* Skeleton while loading next page */}
-      {/* {isFetchingNextPage &&
-        Array.from({ length: 1 }).map((_, i) => <MediaSkeleton  ratio={getRandomRatio()} key={i}/>)} */}
-
-
-
-      {/* Scroll trigger */}
-      {/* Intersection observer trigger */}
-      <div ref={ref} className="h-10" />
-     
-    </div>
-
-              {/* Loader at bottom when fetching next page */}
-      {isFetchingNextPage && (
-        <div className="flex justify-center pb-3">
-          <Loader />
-        </div>
-      )}
-
-     {!hasNextPage && !isLoading && (
-  <div className="text-center text-black py-2">
-    You’ve reached the end 👋🏼
-  </div>
-)}
-
-    </div>
-
-
-    
-      
+        {/* End Message */}
+        {!hasNextPage && !isLoading && (
+          <div className="text-center text-black py-2">
+            You’ve reached the end 👋🏼
+          </div>
+        )}
+      </div>
     </>
-
-
-    
-    
-
   );
 };
 

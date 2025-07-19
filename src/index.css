@@ -29,6 +29,21 @@ video, img{
   animation: fadeInUp 0.5s ease-in-out forwards;
 }
 
+.my-masonry-grid {
+  display: flex;
+  margin-left: -1rem; /* gutter size offset */
+  width: auto;
+  margin-top: 1rem;
+}
+.my-masonry-grid_column {
+  padding-left: 1rem; /* gutter size */
+  background-clip: padding-box;
+}
+.my-masonry-grid_column > div {
+  margin-bottom: 1rem;
+}
+
+
 
 /* loaderAnimation1 */
 .loader {
